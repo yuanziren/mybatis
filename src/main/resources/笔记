@@ -42,4 +42,15 @@
         3.1通过xml
         3.2通过在接口中添加注解
         3.3通过包扫描
+三、通过接口执行查询
+    1、编写UserMapper.java接口
+    2、在UserMapper.xml中编写sql
+    3、编写单元测试类UserDaoImplTest
+    4、编写UserDaoImpl类调用接口，执行查询
+    注意：如果执行查询的参数大于1，那么在接口的参数类型前面加上@Param，如
+        public User queryUserByNameAndId(@Param("id") Integer id, @Param("userName") String userName);
+        <select id="queryUserByNameAndId" resultType="user">
+                select id,user_name as userName,user_pwd as userPwd from user
+                where user_name=#{userName} and id=#{id}
+        </select>
 

@@ -1,5 +1,7 @@
 package com.yuanziren;
 
+import com.yuanziren.dao.UserDao;
+import com.yuanziren.mapper.UserMapper;
 import com.yuanziren.po.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -32,5 +34,36 @@ public class MyBatisTest {
         System.out.println(user);
 
         session.close();
+    }
+
+
+    @Test
+    public void test02() throws IOException {
+
+        InputStream in = Resources.getResourceAsStream("mybatis.xml");
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
+        SqlSession session = sqlSessionFactory.openSession();
+        UserDao userDao = session.getMapper(UserDao.class);
+
+        User user = userDao.queryUserById(6);
+        System.out.println(user);
+
+        session.close();
+
+    }
+
+    @Test
+    public void test03() throws IOException {
+
+        InputStream in = Resources.getResourceAsStream("mybatis.xml");
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
+        SqlSession session = sqlSessionFactory.openSession();
+        UserMapper userMapper = session.getMapper(UserMapper.class);
+
+        User user = userMapper.queryUserById(6);
+        System.out.println(user);
+
+        session.close();
+
     }
 }

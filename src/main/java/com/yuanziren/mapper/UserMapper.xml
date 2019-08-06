@@ -17,8 +17,27 @@
         select id,user_name as userName,user_pwd as userPwd from user where id=#{id}
     </select>-->
 
+    <!-- select -->
+    <!-- 基本数据类型: int String -->
     <select id="queryUserById" parameterType="int"  resultType="user">
         select id,user_name as userName,user_pwd as userPwd from user where id=#{id}
+    </select>
+    <!-- String -->
+    <select id="queryUserByName" parameterType="string"  resultType="user">
+        select id,user_name as userName,user_pwd as userPwd from user where user_name=#{userName}
+    </select>
+    <!-- Bean -->
+    <select id="queryUserByUser" parameterType="user"  resultType="user">
+        select id,user_name as userName,user_pwd as userPwd from user where user_name=#{userName}
+    </select>
+    <!-- Map -->
+    <select id="queryUserByMap" parameterType="map"  resultType="user">
+        select id,user_name as userName,user_pwd as userPwd from user where user_name=#{userName}
+    </select>
+
+    <select id="queryUserByNameAndId" resultType="user">
+        select id,user_name as userName,user_pwd as userPwd from user
+        where user_name=#{userName} and id=#{id}
     </select>
 
 </mapper>
