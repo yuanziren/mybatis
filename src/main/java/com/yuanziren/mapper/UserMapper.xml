@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+  1.命名空间配置  全局唯一  包名+文件名
+  2.配置Mapped Statement
+  3. statement配置
+       id 值声明statement编号  同一命名空间(同一文件)下不可重复
+       parameterType  输入参数即占位符的数据类型  类型可以是 基本数据类型,字符串,java bean ,map,list等
+       resultType     输出结果  类型可以是基本数据类型,字符串,java bean,map等
+       statement 描述 即待执行的sql
+       #{id}  占位符  变量名为id/value 均可   ${value}  变量名必须为value 字符串拼接形式  无法避免sql 注入
+ -->
+<mapper namespace="com.yuanziren.mapper.UserMapper">
+    <select id="queryUserById" parameterType="int"  resultType="com.yuanziren.po.User">
+        select id,user_name as userName,user_pwd as userPwd from user where id=#{id}
+    </select>
+    <!--<update id=""/>-->
+    <!--<insert id=""/>-->
+    <!--<delete id=""/>-->
+</mapper>
