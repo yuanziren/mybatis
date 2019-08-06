@@ -8,11 +8,43 @@
 
 <!-- 添加数据库连接相关配置信息 -->
 <configuration>
+    <properties resource="jdbc.properties"></properties>
+    <typeAliases>
+        <!-- 单独指定 -->
+        <!--<typeAlias type="com.shsxt.po.User" alias="user"></typeAlias>-->
+        <!-- 包扫描 -->
+        <package name="com.yuanziren.po"/>
+    </typeAliases>
     <environments default="development">
         <environment id="development">
             <!-- 加入事务控制 -->
-            <transactionManager type="jdbc" />
+            <transactionManager type="jdbc"/>
             <!-- 配置数据库连接信息 -->
+            <dataSource type="pooled">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+
+        <environment id="test">
+            <transactionManager type="JDBC" />
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver2}" />
+                <property name="url" value="${jdbc.url2}" />
+                <property name="username" value="${jdbc.username2}" />
+                <property name="password" value="${jdbc.password2}" />
+            </dataSource>
+        </environment>
+    </environments>
+
+
+   <!-- <environments default="development">
+        <environment id="development">
+            &lt;!&ndash; 加入事务控制 &ndash;&gt;
+            <transactionManager type="jdbc" />
+            &lt;!&ndash; 配置数据库连接信息 &ndash;&gt;
             <dataSource type="pooled">
                 <property name="driver" value="com.mysql.jdbc.Driver" />
                 <property name="url" value="jdbc:mysql://127.0.0.1:3306/mybatis" />
@@ -21,11 +53,16 @@
             </dataSource>
         </environment>
     </environments>
-
+-->
 
     <!-- mapper 配置文件指定 文件数量可配置多个-->
     <mappers>
-        <mapper resource="com/yuanziren/mapper/UserMapper.xml" />
+        <!-- 1. 通过xml配置 -->
+        <!--<mapper resource="com/yuanziren/mapper/UserMapper.xml"/>-->
+        <!-- 2. 通过注解配置 -->
+<!--        <mapper class="com.yuanziren.dao.UserDao"/>-->
+        <!-- 3. 包扫描 -->
+        <package name="com.yuanziren.mapper"/>
     </mappers>
 
 </configuration>
